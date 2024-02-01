@@ -91,28 +91,10 @@ export default {
     },
     methods: {
         listen() {
-            console.log("lessing");
-            Echo.private("App.Models.User.1").notification(
-                (notification) => {
-                    console.log(notification);
-                    //     this.unreadNotifications.unshift(notification);
-                    //     this.$toast.success(notification.data.title, {
-                    //         position: "bottom-right",
-                    //         timeout: 5000,
-                    //         closeOnClick: true,
-                    //         pauseOnFocusLoss: true,
-                    //         pauseOnHover: true,
-                    //         draggable: true,
-                    //         draggablePercent: 0.6,
-                    //         showCloseButtonOnHover: false,
-                    //         hideProgressBar: true,
-                    //         closeButton: "button",
-                    //         icon: notification.data.icon,
-                    //         rtl: false,
-                    //     });
-                    //     let alertNotify = new Audio(this.alert);
-                    //     return alertNotify.play();
-                });
+            // console.log("lessing");
+            Echo.private("App.Models.User.1").notification((notification) => {
+                console.log(notification);
+            });
         },
     }
 }

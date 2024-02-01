@@ -32,7 +32,16 @@ const option = {
     wssPort: import.meta.env.VITE_PUSHER_PORT ?? 443,
     forceTLS: (import.meta.env.VITE_PUSHER_SCHEME ?? "https") === "https",
     enabledTransports: ["ws", "wss"],
-    disableStats: true,
+    disableStats: false,
+    // broadcaster: "pusher",
+    // key: "3bc5ebd7c6e47ec69b86",
+    // cluster: "ap2",
+    // wsHost: "laravel.test",
+    // wsPort: 6001,
+    // wssPort: 6001,
+    // forceTLS: false,
+    // enabledTransports: ["ws", "wss"],
+    // disableStats: false,
 };
 console.log(option);
 window.Echo = new Echo(option);
