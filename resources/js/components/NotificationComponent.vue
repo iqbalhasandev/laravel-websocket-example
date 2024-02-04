@@ -81,6 +81,9 @@
                 </div>
             </div>
         </div>
+        <audio controls ref="notificationSound" autoplay="true">
+            <source src="/notification-sound.mp3" type="audio/mpeg">
+        </audio>
     </div>
 </template>
 
@@ -101,16 +104,42 @@ export default {
     },
     mounted() {
         // console.log('Component mounted.')
+        this.listen();
+
     },
 
     created() {
-        this.listen();
         this.getNotifications();
     },
     methods: {
+        playAudio() {
+            this.$refs.notificationSound.play().then(() => {
+                clearInterval(playAttempt);
+            })
+                .catch((error) => {
+                    // console.log("Unable to play the video, User has not interacted yet.");
+                });
+        },
         listen() {
+
             Echo.private("App.Models.User." + this.authUser.id).notification((notification) => {
                 this.getNotifications();
+                // this.unreadNotifications.unshift(notification);
+                // this.$toast.success(notification.data.title, {
+                //     position: "bottom-right",
+                //     timeout: 5000,
+                //     closeOnClick: true,
+                //     pauseOnFocusLoss: true,
+                //     pauseOnHover: true,
+                //     draggable: true,
+                //     draggablePercent: 0.6,
+                //     showCloseButtonOnHover: false,
+                //     hideProgressBar: true,
+                //     closeButton: "button",
+                //     icon: notification.data.icon,
+                //     rtl: false,
+                // });
+                this.playAudio();
             });
         },
         /**

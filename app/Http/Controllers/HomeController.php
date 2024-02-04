@@ -45,5 +45,10 @@ class HomeController extends Controller
             ]
         ];
         return auth()->user()->notify(new TestNotification($data));
+
+
+        // call event
+        return event(new TestEvent());
+
     }
 }

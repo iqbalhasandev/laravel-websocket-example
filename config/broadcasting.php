@@ -36,12 +36,12 @@ return [
             'secret'         => env('PUSHER_APP_SECRET'),
             'app_id'         => env('PUSHER_APP_ID'),
             'options'        => [
-                'cluster' => "ap2",
-                'host'    => 'laravel.test',
-                'port'    => 6001,
-                'scheme'  => 'http',
-                // 'encrypted' => true,
-                'useTLS'  => false,
+                'cluster'   => "ap2",
+                'host'      => 'laravel.test',
+                'port'      => 6001,
+                'scheme'    => 'http',
+                'encrypted' => true,
+                'useTLS'    => false,
             ],
             'client_options' => [
                 // Guzzle client options: https://docs.guzzlephp.org/en/stable/request-options.html

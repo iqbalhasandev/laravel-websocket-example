@@ -43,6 +43,6 @@ class TestEvent implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new PrivateChannel('App.Models.User.1');
+        return new PrivateChannel('App.Models.User.' . auth()->id());
     }
 }
