@@ -44,8 +44,7 @@
                                     </div>
                                 </a>
                             </li>
-                            <li v-for="notification, key in unreadNotifications" :key="key"
-                                class="list-group-item active my-1 ">
+                            <li v-for="notification, key in readNotifications" :key="key" class="list-group-item  my-1 ">
                                 <a :href="notification.data.click_action ?? '#'" class="">
                                     <div class="row">
                                         <div class="col-md-2 notification-icon">
@@ -111,7 +110,7 @@ export default {
     methods: {
         listen() {
             Echo.private("App.Models.User." + this.authUser.id).notification((notification) => {
-                console.log(notification);
+                this.getNotifications();
             });
         },
         /**
