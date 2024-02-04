@@ -43,5 +43,4 @@ const option = {
     // enabledTransports: ["ws", "wss"],
     // disableStats: false,
 };
-console.log(option);
 window.Echo = new Echo(option);

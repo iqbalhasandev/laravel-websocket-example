@@ -44,12 +44,6 @@ class HomeController extends Controller
                 "created_at"   => '2019-01-01 00:00:00'
             ]
         ];
-        // return auth()->user()->notify(new TestNotification($data));
-
-
-        // call event
-        // return event(new TestEvent());
-        broadcast(new TestEvent());
-
+        return auth()->user()->notify(new TestNotification($data));
     }
 }

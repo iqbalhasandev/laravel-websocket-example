@@ -9,8 +9,9 @@
                         {{ session('status') }}
                     </div>
                 @endif
-
-                <notification-component></notification-component>
+                <notification-component user="{{ auth()->user() }}" notification-list-url="{{ route('notification.list') }}"
+                    notification-read-all-url="{{ route('notification.read.all') }}"
+                    notification-clear-all-url="{{ route('notification.clear.all') }}"></notification-component>
             </div>
         </div>
     </div>
