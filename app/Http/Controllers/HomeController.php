@@ -41,7 +41,7 @@ class HomeController extends Controller
             "icon"  => 'fa fa-bell',
             "data"  => [
                 "click_action" => 'https://google.com',
-                "created_at"   => '2019-01-01 00:00:00'
+                "created_at"   => now()
             ]
         ];
         return auth()->user()->notify(new TestNotification($data));

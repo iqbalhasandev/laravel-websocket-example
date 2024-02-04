@@ -26,7 +26,6 @@ class NotificationResource extends JsonResource
             "image"           => $this->data['image'],
             "icon"            => $this->data['icon'],
             "data"            => $this->data['data'],
-            "created_at"      => $this->created_at->diffForHumans(),
         ];
     }
 }

@@ -65,10 +65,7 @@ class TestNotification extends Notification
     public function toBroadcast($notifiable)
     {
         return (new BroadcastMessage([
-            "data"       => [
-                $this->data
-            ],
-            "created_at" => now()->diffForHumans(),
+            $this->data
         ]));
     }
 }

@@ -38,7 +38,7 @@
                                         </div>
                                         <div class="col-md-2 notification-date">
                                             <p class="tx-12 text-muted">
-                                                {{ notification.data.created_at }}
+                                                {{ formatDateTime(notification.data.created_at) }}
                                             </p>
                                         </div>
                                     </div>
@@ -60,7 +60,7 @@
                                         </div>
                                         <div class="col-md-2 notification-date">
                                             <p class="tx-12 text-muted">
-                                                {{ notification.data.created_at }}
+                                                {{ formatDateTime(notification.data.created_at) }}
                                             </p>
                                         </div>
                                     </div>
@@ -81,13 +81,15 @@
                 </div>
             </div>
         </div>
-        <audio controls ref="notificationSound" autoplay="true">
+        <audio ref="notificationSound" class="d-none">
             <source src="/notification-sound.mp3" type="audio/mpeg">
         </audio>
     </div>
 </template>
 
 <script>
+import moment from 'moment';
+
 export default {
     props: [
         'user',
@@ -123,22 +125,39 @@ export default {
         listen() {
 
             Echo.private("App.Models.User." + this.authUser.id).notification((notification) => {
-                this.getNotifications();
-                // this.unreadNotifications.unshift(notification);
-                // this.$toast.success(notification.data.title, {
-                //     position: "bottom-right",
-                //     timeout: 5000,
-                //     closeOnClick: true,
-                //     pauseOnFocusLoss: true,
-                //     pauseOnHover: true,
-                //     draggable: true,
-                //     draggablePercent: 0.6,
-                //     showCloseButtonOnHover: false,
-                //     hideProgressBar: true,
-                //     closeButton: "button",
-                //     icon: notification.data.icon,
-                //     rtl: false,
-                // });
+                // this.getNotifications();
+                console.log(notification[0]);
+                if (notification[0]) {
+
+                    notification = {
+                        id: notification.id,
+                        read_at: null,
+                        type: notification.type,
+                        notifiable_type: null,
+                        notifiable_id: null,
+                        title: notification[0].title,
+                        body: notification[0].body,
+                        image: notification[0].image,
+                        icon: notification[0].icon,
+                        data: notification[0].data,
+                    };
+                    this.unreadNotifications.unshift(notification);
+                    // this.$toast.success(notification.data.title, {
+                    //     position: "bottom-right",
+                    //     timeout: 5000,
+                    //     closeOnClick: true,
+                    //     pauseOnFocusLoss: true,
+                    //     pauseOnHover: true,
+                    //     draggable: true,
+                    //     draggablePercent: 0.6,
+                    //     showCloseButtonOnHover: false,
+                    //     hideProgressBar: true,
+                    //     closeButton: "button",
+                    //     icon: notification.data.icon,
+                    //     rtl: false,
+                    // });
+                };
+
                 this.playAudio();
             });
         },
@@ -184,6 +203,10 @@ export default {
                 .catch(error => {
                     console.log(error);
                 });
+        },
+        formatDateTime(timestamp) {
+            const formattedDate = moment(timestamp).fromNow();
+            return formattedDate
         },
     }
 }
